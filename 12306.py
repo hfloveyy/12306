@@ -182,6 +182,7 @@ if '有' in train_list:
     else:
         print("failed")
 else: 
+    logger.info('有票！'+ time.asctime( time.localtime(time.time()) )) 
     print("没票！")
 
 
