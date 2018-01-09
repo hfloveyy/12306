@@ -155,7 +155,7 @@ def mail():
 
 
 
-data = '2018-01-24'
+data = '2018-01-31'
 from_station = 'VAB'
 to_station = 'VUQ'#BJP
 
@@ -171,18 +171,20 @@ response = requests.get(url,headers = header,verify = False)
 train_dict = response.json()
 train_result = train_dict['data']['result']
 train_list = train_result[0].split('|')
-print(len(train_list))
 
 if '有' in train_list:
     print("有票！")
     ret=mail()
     if ret:
         print("邮件发送成功")
-        logger.info('有票！'+ time.asctime( time.localtime(time.time()) )) 
+        logger.info('有票！'+ time.asctime( time.localtime(time.time()) ))
+        logger.info('软卧：'+train_list[25]) 
+        logger.info('硬卧：'+train_list[27])
+        logger.info('硬座：'+train_list[29])
     else:
         print("failed")
 else: 
-    logger.info('有票！'+ time.asctime( time.localtime(time.time()) )) 
+    logger.info('没票！'+ time.asctime( time.localtime(time.time()) )) 
     print("没票！")
 
 
